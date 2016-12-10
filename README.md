@@ -1,4 +1,4 @@
-# Human_Activity_Recognition
+# Human Activity Recognition Using Smartphones
 
 ## Overview
 The dataset and script published in this repository is part of the Coursera Course "Getting and Cleaning Data" project assignment.
