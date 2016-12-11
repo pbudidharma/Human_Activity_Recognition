@@ -1,0 +1,92 @@
+GETTING & CLEANING DATA PROCESS FOR HUMAN ACTIVITY RECOGNITION USING SMARTPHONE
+================================================================================
+
+PROJECT DESCRIPTION:
+--------------------
+This data is gathered from an experiments of 30 volunteers performing various activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) as captured by accelerometer and gyroscope embedded in the Samsung Galaxy SII smartphones. It captured 3-axial linear acceleration and 3-axial angular velocity at constant rate of 50Hz.
+The dataset is split into 2 categories: 70% of volunteers for training data, 30% for test data
+ 
+Some pre-processed steps had been applied to the data. For more information on this and the project itself, visit:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+
+INPUT DATA INFORMATION:
+-----------------------
+
+The dataset provided as input for this project was downloaded from:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+For this, we are focusing on the following information:
+1. Subject who carried out the experiment (subject_train.txt, subject_test.txt)
+2. Measured features (X_train.txt, X_test.txt)
+3. Activity types(y_train.txt, y_test.txt)
+
+Files supporting information above:
+1. Names of features being measured (features.txt)
+   NOTE: 
+    - t*Acc-XYZ and t*Gyro-XYZ: t denotes time domain. Acc refers to accelerometer Gyro refers to gyroscope. X, Y and Z are directions.
+    - f*Acc* and f*Gyro*: f denotes frequency domain.
+    - the acceleration signal is separated into body and gravitiy signals (tBodyAcc-XYZ and tGravityAcc-XYZ)
+    - Calculated variables:
+       	mean(): Mean value   std(): Standard deviation   mad(): Median absolute deviation max(): Largest value in array
+       	min(): Smallest value in array   sma(): Signal magnitude area   iqr(): Interquartile range 
+       	energy(): Energy measure. Sum of the squares divided by the number of values	entropy(): Signal entropy
+       	arCoeff(): Autorregresion coefficients with Burg order equal to 4
+	correlation(): correlation coefficient between two signals
+	maxInds(): index of the frequency component with largest magnitude
+	meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+	skewness(): skewness of the frequency domain signal 	kurtosis(): kurtosis of the frequency domain signal 
+	bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+	angle(): Angle between to vectors.
+         
+2. Names of activities being observed (activity_labels.txt)
+
+
+DATA CLEANING PROCESS INFORMATION:
+----------------------------------
+
+STEP 1: READ the required data (lookup data, training and test dataset) and RENAME variables to the more descriptive names.
+         
+STEP 2: MERGE training and test dataset into one data frame called join.data
+
+STEP 3: EXTRACT mean and std feature measurements only - based on the feature names that contains 'mean' or 'std'.
+
+STEP 4: SUBTITUTE activity ID with the appropriate activity names as in activity_labels.txt
+
+STEP 5: GENERATE dataset with average of each variables for each activity for each subjects
+        RENAME the feature names by adding "Mean_" indicating that it's the average values of that feature measurements per subject per activity
+        WRITE data to a text file (final_data.txt) with "tab" as separator
+
+
+VARIABLES INFORMATION:
+----------------------
+
+LOOKUP VARIABLES:
+1. features: list of features being measured as stated in features.txt
+2. activities: list of activities ID and names as stated in activity_labels.txt
+        
+TRAINING DATA VARIABLES:
+1. train.ID: list of subject IDs who carried the experiment for training dataset  
+2. train.measurement: list of features measured (for all training subject and all activities) in the experiment for training dataset
+3. train.activity: list of activity IDs observed (for all training subject) in the experiment for the training dataset
+4. subject.ID: rename of train.ID$V1
+5. activity: rename of train.activity$V1
+6. train: complete training dataset containing train.ID, train.measurement, train.activity
+
+TEST DATA VARIABLES:
+1. test.ID: list of subject IDs who carried the experiment for test dataset
+2. test.measurement: list of features measured (for all test subject and all activities) in the experiment for test dataset
+3. test.activity: list of activity IDs observed (for all test subject) in the experiment for the test dataset
+4. subject.ID: rename of test.ID$V1
+5. activity: rename of test.activity$V1
+6. test: complete test dataset containing test.ID, test.measurement, test.activity
+
+COMBINED DATA:
+join.data: merge training and test data
+column.selection: Names of average (mean) and standard deviation (std) features and subject_ID and activity
+selected.data: dataset containing subject_ID and activity and only means and std features
+final.data: final dataset with average of each variables for each activity for each subject
+Mean_<feat_names>: mean values for each features (refer above to the feature details)
+
+FILE:
+final_data.txt: text file containing final data with "tab" as separator.
